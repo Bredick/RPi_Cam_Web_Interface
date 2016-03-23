@@ -26,7 +26,17 @@
    $options_mf = array('Off' => '0', 'On' => '1');
    $options_cn = array('First' => '1', 'Second' => '2');
    $options_st = array('Off' => '0', 'On' => '1');
-   
+   $current_ip = $_SERVER['SERVER_ADDR'];
+   $ip_long = ip2long ($current_ip);
+   $plus_minus = '1';
+   $ip_plus_long = ($ip_long + $plus_minus);
+   $ip_minus_long = ($ip_long - $plus_minus);
+   $ip_plus = long2ip ($ip_plus_long);
+   $ip_minus = long2ip ($ip_minus_long);
+
+
+
+
    function initCamPos() {
       $tr = fopen("pipan_bak.txt", "r");
       if($tr){
@@ -190,7 +200,7 @@
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" <?php echo $displayStyle; ?>>
          <div class="container">
             <div class="navbar-header">
-               <a class="navbar-brand" href="#"><?php echo CAM_STRING; ?></a>
+               <a class="navbar-brand" href="#"><?php echo CAM_STRING; ?></a><a class="navbar-brand" href="Http://<?php echo $ip_plus; ?>/html">Next Camera</a><a class="navbar-brand" href="Http://<?php echo $ip_minus; ?>/html">Previous Camera</a>
             </div>
          </div>
       </div>
@@ -198,6 +208,7 @@
       <div class="container-fluid text-center liveimage">
          <div><img id="mjpeg_dest" <?php echo getLoadClass() . getImgWidth();?> <?php if(file_exists("pipan_on")) echo "ontouchstart=\"pipan_start()\""; ?> onclick="toggle_fullscreen(this);" src="./loading.jpg"></div>
          <div id="main-buttons" <?php echo $displayStyle; ?> >
+
             <input id="video_button" type="button" class="btn btn-primary">
             <input id="image_button" type="button" class="btn btn-primary">
             <input id="timelapse_button" type="button" class="btn btn-primary">
