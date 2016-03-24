@@ -134,7 +134,8 @@ fn_stop ()
 
 fn_reboot ()
 { # This is function reboot system
-	sudo reboot
+	#sudo reboot
+	sleep 5
 }
 
 
